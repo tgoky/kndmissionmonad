@@ -5567,7 +5567,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"clsx@npm:2.1.1, clsx@npm:^2.0.0":
+"clsx@npm:2.1.1, clsx@npm:^2.0.0, clsx@npm:^2.1.1":
   version: 2.1.1
   resolution: "clsx@npm:2.1.1"
   checksum: acd3e1ab9d8a433ecb3cc2f6a05ab95fe50b4a3cfc5ba47abb6cbf3754585fcb87b84e90c822a1f256c4198e3b41c7f6c391577ffc8678ad587fc0976b24fd57
@@ -12014,6 +12014,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-toastify@npm:^11.0.3":
+  version: 11.0.3
+  resolution: "react-toastify@npm:11.0.3"
+  dependencies:
+    clsx: ^2.1.1
+  peerDependencies:
+    react: ^18 || ^19
+    react-dom: ^18 || ^19
+  checksum: 72d771a7a780c86860350908e6adaf431b681c69ceb09726f3e572a20e361f9fc690906dd5953650e9a4964f0d240d7742d20bce4c86637487772714490c305e
+  languageName: node
+  linkType: hard
+
 "react-transition-group@npm:^4.4.5":
   version: 4.4.5
   resolution: "react-transition-group@npm:4.4.5"
@@ -12539,6 +12551,7 @@ __metadata:
     lucide-react: ^0.474.0
     phaser: ^3.87.0
     react-icons: ^5.4.0
+    react-toastify: ^11.0.3
     recharts: ^2.15.0
   languageName: unknown
   linkType: soft

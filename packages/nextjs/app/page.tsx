@@ -3,14 +3,16 @@
 import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { FaCheckCircle } from "react-icons/fa";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const characters = [
-  { name: "Numbuh 1", fullName: "Nigel Uno", power: "Leadership & Strategy", image: "/111.png" },
-  { name: "Numbuh 2", fullName: "Hoagie P. Gilligan Jr.", power: "Inventor & Pilot", image: "/22.PNG" },
-  { name: "Numbuh 3", fullName: "Kuki Sanban", power: "Animal Whisperer & Joy", image: "/3333.png" },
-  { name: "Numbuh 4", fullName: "Wallabee Beatles", power: "Hand-to-Hand Combat", image: "/number33.jpeg" },
-  { name: "Numbuh 5", fullName: "Abigail Lincoln", power: "Stealth & Intelligence", image: "/no5.png" },
-  { name: "Granny", fullName: "Gramma Stuffum", power: "Super Dooboo Whooping", image: "/granny.png" },
+  { name: "Numbuh 1", fullName: "Nigel Uno", power: "Leadership & Strategy", image: "/1.png" },
+  { name: "Numbuh 2", fullName: "Hoagie P. Gilligan Jr.", power: "Inventor & Pilot", image: "/main2.png" },
+  { name: "Numbuh 3", fullName: "Kuki Sanban", power: "Animal Whisperer & Joy", image: "/3.png" },
+  { name: "Numbuh 4", fullName: "Wallabee Beatles", power: "Hand-to-Hand Combat", image: "/4.png" },
+  { name: "Numbuh 5", fullName: "Abigail Lincoln", power: "Stealth & Intelligence", image: "/5.png" },
+  { name: "Granny", fullName: "Gramma Stuffum", power: "Super Dooboo Whooping", image: "/granny6.png" },
 ];
 
 const HomePage = () => {
@@ -31,14 +33,29 @@ const HomePage = () => {
     setSelected(prev => (prev === index ? null : index));
   };
 
+  const startMission = () => {
+    if (selected === null) {
+      toast.warning("Please select a character before starting the mission!");
+    } else {
+      toast.success(`Mission started with ${characters[selected].name}!`);
+      // Redirect or start the mission logic here
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-row bg-black text-white">
       {/* Left Sidebar */}
       <div className="w-1/5 min-h-screen bg-gray-900 flex flex-col items-center py-10 border-r border-gray-700">
-        {["Start Mission", "Select Difficulty", "Settings", "Multiplayer", "End Game"].map((text, index) => (
+        <button
+          className="w-4/5 py-3 mb-4 text-left px-4 text-white border border-gray-500 hover:bg-yellow-500 transition-all"
+          onClick={startMission}
+        >
+          Start Mission
+        </button>
+        {["Select Difficulty", "Settings", "Multiplayer", "End Game"].map((text, index) => (
           <button
             key={index}
-            className="w-4/5 py-3 mb-4 text-left px-4 text-white border border-gray-500 hover:bg-yellow-500 transition-all hover:text-black"
+            className="w-4/5 py-3 mb-4 text-left px-4 text-white border border-gray-500 hover:bg-yellow-500 transition-all"
           >
             {text}
           </button>
