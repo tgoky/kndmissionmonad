@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -17,11 +15,20 @@ interface ArenaGameProps {
   selectedCharacter: Character;
 }
 
+const gemImages = [
+  "/autumn.png",
+  "/autumn2.png",
+  "/autumn3.png",
+  "/autumn4.png",
+  "/autumn5.png",
+  "/autumn6.png",
+  "/autumn7.png",
+];
+
 const ArenaGame: React.FC<ArenaGameProps> = ({ selectedCharacter }) => {
-  const gameRef = useRef(null);
   const [playerPosition, setPlayerPosition] = useState({ x: 50, y: 80 });
   const [obstacles, setObstacles] = useState<{ x: number; y: number; id: number }[]>([]);
-  const [gems, setGems] = useState<{ x: number; y: number; id: number }[]>([]);
+  const [gems, setGems] = useState<{ x: number; y: number; id: number; image: string }[]>([]);
   const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(false);
 
@@ -58,7 +65,15 @@ const ArenaGame: React.FC<ArenaGameProps> = ({ selectedCharacter }) => {
     if (gameOver) return;
 
     const interval = setInterval(() => {
-      setGems(prev => [...prev, { x: Math.random() * 90, y: Math.random() * 90, id: Math.random() }]);
+      setGems(prev => [
+        ...prev,
+        {
+          x: Math.random() * 90,
+          y: Math.random() * 90,
+          id: Math.random(),
+          image: gemImages[Math.floor(Math.random() * gemImages.length)], // Random gem image
+        },
+      ]);
     }, 3000);
 
     return () => clearInterval(interval);
@@ -113,11 +128,13 @@ const ArenaGame: React.FC<ArenaGameProps> = ({ selectedCharacter }) => {
         ></div>
       ))}
       {gems.map(gem => (
-        <div
+        <img
           key={gem.id}
-          className="absolute w-6 h-6 bg-yellow-400 rounded-full"
+          src={gem.image}
+          alt="gem"
+          className="absolute w-8 h-8"
           style={{ left: `${gem.x}%`, top: `${gem.y}%` }}
-        ></div>
+        />
       ))}
       {gameOver && <h1 className="absolute text-white text-3xl">Game Over!</h1>}
     </div>

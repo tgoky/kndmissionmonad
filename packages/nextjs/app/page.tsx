@@ -11,8 +11,8 @@ const characters = [
   { name: "Numbuh 1", fullName: "Nigel Uno", power: "Leadership & Strategy", image: "/1.png" },
   { name: "Numbuh 2", fullName: "Hoagie P. Gilligan Jr.", power: "Inventor & Pilot", image: "/main2.png" },
   { name: "Numbuh 3", fullName: "Kuki Sanban", power: "Animal Whisperer & Joy", image: "/3.png" },
-  { name: "Numbuh 4", fullName: "Wallabee Beatles", power: "Hand-to-Hand Combat", image: "/4.pg" },
-  { name: "Numbuh 5", fullName: "Abigail Lincoln", power: "Stealth & Intelligence", image: "/no5.png" },
+  { name: "Numbuh 4", fullName: "Wallabee Beatles", power: "Hand-to-Hand Combat", image: "/4.png" },
+  { name: "Numbuh 5", fullName: "Abigail Lincoln", power: "Stealth & Intelligence", image: "/5.png" },
   { name: "Granny", fullName: "Gramma Stuffum", power: "Super Dooboo Whooping", image: "/granny6.png" },
 ];
 
