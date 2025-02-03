@@ -54,7 +54,7 @@ const HomePage = () => {
         >
           Start Mission
         </button>
-        {["Select Difficulty", "Settings", "Multiplayer", "End Game"].map((text, index) => (
+        {["Leaderboard", "Settings", "Multiplayer", "End Game"].map((text, index) => (
           <button
             key={index}
             className="w-4/5 py-3 mb-4 text-left px-4 text-white border border-gray-500 hover:bg-yellow-500 transition-all"
@@ -73,7 +73,8 @@ const HomePage = () => {
               {characters.map((char, index) => (
                 <div
                   key={index}
-                  className="relative character p-4 bg-gray-800 rounded-xl shadow-lg flex flex-col items-center justify-center text-center cursor-pointer"
+                  className={`relative character p-4 bg-gray-800 rounded-xl shadow-lg flex flex-col items-center justify-center text-center cursor-pointer transition-all duration-300 
+              ${selected === index ? "scale-110 border-4 border-yellow-500 bg-yellow-500" : "bg-gray-700 hover:bg-black"}`}
                   onClick={() => toggleSelect(index)}
                 >
                   {selected === index && <FaCheckCircle className="absolute top-2 right-2 text-green-500 text-xl" />}
