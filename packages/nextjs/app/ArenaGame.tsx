@@ -164,7 +164,15 @@ const ArenaGame: React.FC<ArenaGameProps> = ({ selectedCharacter }) => {
   };
 
   return (
-    <div className="relative w-full h-screen bg-gray-900 overflow-hidden flex justify-center items-center">
+    <div
+      className="relative w-full h-screen bg-gray-900 overflow-hidden flex justify-center items-center"
+      style={{
+        backgroundImage: 'url("/2dw.jpg")', // Add the background image URL here
+        backgroundSize: "cover", // Makes sure the image covers the entire game area
+        backgroundPosition: "center", // Center the image
+        backgroundRepeat: "no-repeat", // Prevent repeating the image
+      }}
+    >
       <motion.h2
         key={score} // Re-animates when score changes
         initial={{ scale: 1, opacity: 0.6 }}
