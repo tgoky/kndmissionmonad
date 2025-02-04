@@ -9,46 +9,46 @@ import "react-toastify/dist/ReactToastify.css";
 
 const characters = [
   {
-    name: "Numbuh 1",
-    fullName: "Nigel Uno",
+    name: "Birdie 1",
+    fullName: "Goldfinches",
     power: "Leadership & Strategy",
-    image: "/1.png",
+    image: "/m1.png",
     background: "/2dw.jpg", // Add a unique background for Numbuh 1
   },
   {
-    name: "Numbuh 2",
-    fullName: "Hoagie P. Gilligan Jr.",
+    name: "Birdie 2",
+    fullName: "Northern cardinal",
     power: "Inventor & Pilot",
-    image: "/main2.png",
-    background: "/wall2.jpg", // Add a unique background for Numbuh 2
+    image: "/m2.png",
+    background: "/bg0.jpg", // Add a unique background for Numbuh 2
   },
   {
-    name: "Numbuh 3",
-    fullName: "Kuki Sanban",
+    name: "Birdie 3",
+    fullName: "Funny Turacos",
     power: "Animal Whisperer & Joy",
-    image: "/3.png",
-    background: "/background3.jpg", // Add a unique background for Numbuh 3
+    image: "/m3.png",
+    background: "/bg3.jpg", // Add a unique background for Numbuh 3
   },
   {
-    name: "Numbuh 4",
-    fullName: "Wallabee Beatles",
+    name: "Birdie 4",
+    fullName: "Lesser goldfinch",
     power: "Hand-to-Hand Combat",
-    image: "/4.png",
-    background: "/background4.jpg", // Add a unique background for Numbuh 4
+    image: "/m4.png",
+    background: "/bg2.jpg", // Add a unique background for Numbuh 4
   },
   {
-    name: "Numbuh 5",
+    name: "Birdie 5",
     fullName: "Abigail Lincoln",
     power: "Stealth & Intelligence",
-    image: "/5.png",
-    background: "/background5.jpg", // Add a unique background for Numbuh 5
+    image: "/m5.png",
+    background: "/bg3.jpg", // Add a unique background for Numbuh 5
   },
   {
     name: "Granny",
-    fullName: "Gramma Stuffum",
+    fullName: "Seablue-fronted canary",
     power: "Super Dooboo Whooping",
-    image: "/granny6.png",
-    background: "/background6.jpg", // Add a unique background for Granny
+    image: "/m6.png",
+    background: "/bg1.jpg", // Add a unique background for Granny
   },
 ];
 
@@ -115,10 +115,9 @@ const HomePage = () => {
                   onClick={() => toggleSelect(index)}
                 >
                   {selected === index && <FaCheckCircle className="absolute top-2 right-2 text-green-500 text-xl" />}
-                  <img src={char.image} alt={char.name} className="w-40 h-40 object-contain" />
-                  <p className="text-center mt-2 font-semibold">
-                    {char.name} {char.fullName}
-                  </p>
+                  <img src={char.image} alt={char.name} className="w-60 h-40 object-contain" />
+
+                  <p className="text-center mt-2 font-semibold">{char.fullName}</p>
                   <p className="text-center mt-2 font-semibold">{char.power}</p>
                 </div>
               ))}
