@@ -161,6 +161,29 @@ const HomePage = () => {
     <div className="min-h-screen flex flex-row bg-black text-white">
       {/* Left Sidebar */}
       <div className="w-1/5 min-h-screen bg-gray-900 flex flex-col items-center py-10 border-r border-gray-700">
+        <p className="text-xs text-center">
+          connect wallet at the top right corner,{" "}
+          <span className="blinking-text text-orange-400 font-bold"> select a character</span> Next and then click the
+          start mission
+        </p>
+        <p className="text-xs text-center">
+          the start mission needs a <span className="blinking-text text-pink-400 font-bold"> 🕊️ birdy tap</span> to
+          start the mission. Tap the startMission button twice, one tap at a time!
+        </p>
+
+        <p className="text-xs text-center">
+          Earn <span className="blinking-text text-yellow-400 font-bold">MuffledBird </span>
+          <span className="blinking-text text-yellow-400 font-bold"> $MB</span> tokens by surviving the monad mission
+          and dodging bombs.
+        </p>
+        <p className="text-xs text-center">
+          desktop mode is most suitable for best experience{" "}
+          <span className="blinking-text text-pink-400 font-bold">Use arrow keys to dodge bombs</span>
+          <span className="blinking-text text-green-400 font-bold"> make contact with gems </span>
+        </p>
+        <p className="text-xs text-center">
+          Character game pass fee : <span className="animate-pulse text-yellow-400 font-bold">0.34 MON</span>
+        </p>
         <button
           className="w-4/5 py-3 mb-4 text-left px-4 text-white border border-gray-500 border-dashed hover:bg-green-500 transition-all"
           onClick={startMission}
