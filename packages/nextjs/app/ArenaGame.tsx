@@ -4,11 +4,13 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 // Define TypeScript type for the character
+// Define TypeScript type for the character
 interface Character {
   name: string;
   fullName: string;
   power: string;
   image: string;
+  background: string; // Add background property
 }
 
 // Define props type for ArenaGame
@@ -130,6 +132,8 @@ const ArenaGame: React.FC<ArenaGameProps> = ({ selectedCharacter }) => {
     });
   }, [obstacles, playerPosition, gameOverSound]);
 
+  const backgroundImage = selectedCharacter.background;
+
   // Check for gem collection
   useEffect(() => {
     setGems(prev =>
@@ -167,7 +171,7 @@ const ArenaGame: React.FC<ArenaGameProps> = ({ selectedCharacter }) => {
     <div
       className="relative w-full h-screen bg-gray-900 overflow-hidden flex justify-center items-center"
       style={{
-        backgroundImage: 'url("/2dw.jpg")', // Add the background image URL here
+        backgroundImage: `url(${backgroundImage})`, // Add the background image URL here
         backgroundSize: "cover", // Makes sure the image covers the entire game area
         backgroundPosition: "center", // Center the image
         backgroundRepeat: "no-repeat", // Prevent repeating the image
