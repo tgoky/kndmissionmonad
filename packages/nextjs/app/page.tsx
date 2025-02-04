@@ -9,6 +9,7 @@ import gsap from "gsap";
 import { FaCheckCircle } from "react-icons/fa";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { CheckCircleIcon } from "@heroicons/react/24/solid";
 
 const contractAddress = "0x706e51256096F5aabA58A55B4e2B17416968E7D2";
 
@@ -225,7 +226,9 @@ const HomePage = () => {
                   ${selected === index ? "scale-110 border-4 border-yellow-500 bg-yellow-500" : "bg-gray-700 hover:bg-black"}`}
                     onClick={() => toggleSelect(index)}
                   >
-                    {selected === index && <FaCheckCircle className="absolute top-2 right-2 text-green-500 text-xl" />}
+                    {selected === index && (
+                      <CheckCircleIcon className="absolute top-2 right-2 text-green-500 w-6 h-6" />
+                    )}
                     <img src={char.image} alt={char.name} className="w-60 h-40 object-contain" />
                     <p className="text-center mt-2 font-semibold">{char.fullName}</p>
                     <p className="text-center mt-2 font-semibold">{char.power}</p>
