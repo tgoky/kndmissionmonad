@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -34,13 +35,14 @@ const ArenaGame: React.FC<ArenaGameProps> = ({ selectedCharacter }) => {
   const [pointSound, setPointSound] = useState<HTMLAudioElement | null>(null);
   const [gameOverSound, setGameOverSound] = useState<HTMLAudioElement | null>(null);
   const [gameStartSound, setGameStartSound] = useState<HTMLAudioElement | null>(null);
+  const [floatingPoints, setFloatingPoints] = useState<{ id: number; x: number; y: number }[]>([]);
 
   // Load sounds only on the client side
   useEffect(() => {
     if (typeof window !== "undefined") {
       setPointSound(new Audio("/gamestart.mp3"));
       setGameOverSound(new Audio("/gameover.mp3"));
-      setGameStartSound(new Audio("/restart.mp3"));
+      setGameStartSound(new Audio("/stt.wav"));
     }
   }, []);
 
@@ -147,7 +149,31 @@ const ArenaGame: React.FC<ArenaGameProps> = ({ selectedCharacter }) => {
 
   return (
     <div className="relative w-full h-screen bg-gray-900 overflow-hidden flex justify-center items-center">
-      <h2 className="absolute top-4 text-white text-xl">Score: {score}</h2>
+      <motion.h2
+        key={score} // Re-animates when score changes
+        initial={{ scale: 1, opacity: 0.6 }}
+        animate={{ scale: 1.4, opacity: 1 }}
+        transition={{ duration: 0.3 }}
+        className="absolute top-6 text-yellow-400 font-bold text-3xl tracking-widest drop-shadow-lg"
+      >
+        Score: {score}
+      </motion.h2>
+
+      <AnimatePresence>
+        {floatingPoints.map(point => (
+          <motion.div
+            key={point.id}
+            initial={{ opacity: 1, y: 0 }}
+            animate={{ opacity: 0, y: -40 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1 }}
+            className="absolute text-green-500 font-bold text-lg"
+            style={{ left: `${point.x}%`, top: `${point.y}%` }}
+          >
+            +10
+          </motion.div>
+        ))}
+      </AnimatePresence>
 
       {/* Player Character */}
       {!gameOver && selectedCharacter && (
@@ -179,15 +205,46 @@ const ArenaGame: React.FC<ArenaGameProps> = ({ selectedCharacter }) => {
         />
       ))}
 
-      {/* Game Over Screen */}
-      {gameOver && (
-        <div className="absolute flex flex-col items-center text-white text-3xl">
-          <h1>Game Over!</h1>
-          <button onClick={restartGame} className="mt-4 bg-blue-500 text-white px-4 py-2 rounded-lg">
-            Restart
-          </button>
-        </div>
-      )}
+      {/* Game Over Modal */}
+      <AnimatePresence>
+        {gameOver && (
+          <motion.div
+            className="absolute inset-0 flex justify-center items-center bg-black bg-opacity-80"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+          >
+            <motion.div
+              className="bg-gray-800 text-white p-8 rounded-lg shadow-lg flex flex-col items-center"
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 50 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+            >
+              <motion.h1
+                className="text-4xl font-bold text-red-500"
+                initial={{ scale: 0.5, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+              >
+                Game Over
+              </motion.h1>
+              <p className="mt-4 text-lg">
+                Your final score: <span className="text-yellow-400">{score}</span>
+              </p>
+              <motion.button
+                onClick={restartGame}
+                className="mt-6 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-lg shadow-md"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                Restart
+              </motion.button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Mobile Touch Controls */}
       <div className="absolute bottom-5 flex space-x-2">
