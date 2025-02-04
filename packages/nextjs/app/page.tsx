@@ -49,7 +49,7 @@ const HomePage = () => {
       {/* Left Sidebar */}
       <div className="w-1/5 min-h-screen bg-gray-900 flex flex-col items-center py-10 border-r border-gray-700">
         <button
-          className="w-4/5 py-3 mb-4 text-left px-4 text-white border border-gray-500 hover:bg-yellow-500 transition-all"
+          className="w-4/5 py-3 mb-4 text-left px-4 text-white border border-gray-500 border-dashed hover:bg-yellow-500 transition-all"
           onClick={startMission}
         >
           Start Mission
@@ -57,7 +57,7 @@ const HomePage = () => {
         {["Leaderboard", "Settings", "Multiplayer", "End Game"].map((text, index) => (
           <button
             key={index}
-            className="w-4/5 py-3 mb-4 text-left px-4 text-white border border-gray-500 hover:bg-yellow-500 transition-all"
+            className="w-4/5 py-3 mb-4 text-left px-4 text-white border border-gray-500 border-dashed hover:bg-yellow-500 transition-all"
           >
             {text}
           </button>

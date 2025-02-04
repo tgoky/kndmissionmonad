@@ -233,7 +233,7 @@ const ArenaGame: React.FC<ArenaGameProps> = ({ selectedCharacter }) => {
             transition={{ duration: 0.5, ease: "easeOut" }}
           >
             <motion.div
-              className="bg-gray-900 text-white p-10 rounded-lg shadow-2xl border-4 border-yellow-400 flex flex-col items-center"
+              className="bg-gray-900 text-white p-10 rounded-lg shadow-2xl border-4 border-yellow-400 border-dashed flex flex-col items-center"
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 50 }}
@@ -272,7 +272,7 @@ const ArenaGame: React.FC<ArenaGameProps> = ({ selectedCharacter }) => {
               <motion.button
                 onClick={restartGame}
                 className={`mt-6 font-bold py-3 px-8 rounded-lg shadow-md border-2 border-yellow-300 
-              ${hasClaimed ? "bg-blue-500 hover:bg-yellow-400 text-white hover:text-black" : "bg-gray-500 text-gray-300 cursor-not-allowed"}`}
+            ${hasClaimed ? "bg-blue-500 hover:bg-yellow-400 text-white hover:text-black" : "bg-gray-500 text-gray-300 cursor-not-allowed"}`}
                 whileHover={hasClaimed ? { scale: 1.1, boxShadow: "0px 0px 15px rgba(255, 223, 0, 0.8)" } : {}}
                 whileTap={hasClaimed ? { scale: 0.95 } : {}}
                 disabled={!hasClaimed} // Disable when hasn't claimed
