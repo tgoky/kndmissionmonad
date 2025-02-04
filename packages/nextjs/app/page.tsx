@@ -3,10 +3,28 @@
 import React, { useEffect, useRef, useState } from "react";
 import ArenaGame from "./ArenaGame";
 import Leaderboard from "./Leaderboard";
+import contractABI from "./abi/ards.json";
+import { ethers } from "ethers";
 import gsap from "gsap";
 import { FaCheckCircle } from "react-icons/fa";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
+const contractAddress = "0x706e51256096F5aabA58A55B4e2B17416968E7D2";
+
+const getContract = () => {
+  if (typeof window === "undefined" || !window.ethereum) {
+    throw new Error("Ethereum provider not found");
+  }
+
+  // Use Web3Provider for connecting to MetaMask
+  const provider = new ethers.providers.Web3Provider(window.ethereum); // This is a Web3Provider, not a generic Provider
+
+  // Get the signer (which is needed for sending transactions)
+  const signer = provider.getSigner();
+
+  return new ethers.Contract(contractAddress, contractABI, signer);
+};
 
 const characters = [
   {
@@ -59,6 +77,7 @@ const HomePage = () => {
   const [missionStarted, setMissionStarted] = useState(false);
   const [showLeaderboard, setShowLeaderboard] = useState(false);
   const [showModal, setShowModal] = useState(false); // State for the modal visibility
+  const [wallet, setWallet] = useState<any>(null);
 
   const toggleLeaderboard = () => {
     setShowLeaderboard(!showLeaderboard); // Toggle the leaderboard view
@@ -78,12 +97,47 @@ const HomePage = () => {
     setSelected(prev => (prev === index ? null : index));
   };
 
-  const startMission = () => {
+  const startMission = async () => {
     if (selected === null) {
       toast.warning("Please select a character before starting the mission!");
-    } else {
+      return;
+    }
+
+    try {
+      // Get the contract and entry fee
+      const contract = getContract(); // Make sure getContract is correctly set up
+      const entryFee = await contract.entryFee();
+
+      console.log("Entry Fee: ", entryFee.toString()); // Check if the entry fee is correct
+
+      // Get the provider from the window.ethereum object (Web3Provider)
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+
+      // Get the signer (connected wallet) from the provider
+      const signer = provider.getSigner();
+
+      // Check if the wallet has enough funds
+      const balance = await signer.getBalance();
+      console.log("Wallet Balance: ", balance.toString()); // Check the wallet balance
+
+      if (balance.lt(entryFee)) {
+        toast.warning("You do not have enough funds to start the mission.");
+        return;
+      }
+
+      // Ask MetaMask to send the transaction
+      const tx = await contract.startGame({
+        value: entryFee, // Sending the entry fee
+      });
+
+      // Wait for the transaction to be mined
+      await tx.wait();
+
       toast.success(`Mission started with ${characters[selected].name}!`);
       setMissionStarted(true);
+    } catch (error) {
+      toast.error("There was an error starting the mission.");
+      console.error(error);
     }
   };
 

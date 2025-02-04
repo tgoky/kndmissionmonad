@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import contractABI from "./abi/ards.json";
+import { ethers } from "ethers";
 import { AnimatePresence, motion } from "framer-motion";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -12,6 +14,22 @@ interface Character {
   image: string;
   background: string; // Add background property
 }
+
+const contractAddress = "0x706e51256096F5aabA58A55B4e2B17416968E7D2";
+
+const getContract = () => {
+  if (typeof window === "undefined" || !window.ethereum) {
+    throw new Error("Ethereum provider not found");
+  }
+
+  // Use Web3Provider for connecting to MetaMask
+  const provider = new ethers.providers.Web3Provider(window.ethereum); // This is a Web3Provider, not a generic Provider
+
+  // Get the signer (which is needed for sending transactions)
+  const signer = provider.getSigner();
+
+  return new ethers.Contract(contractAddress, contractABI, signer);
+};
 
 // Define props type for ArenaGame
 interface ArenaGameProps {
@@ -149,6 +167,34 @@ const ArenaGame: React.FC<ArenaGameProps> = ({ selectedCharacter }) => {
     );
   }, [playerPosition, pointSound]);
 
+  const handleClaim = async (score: number) => {
+    try {
+      // Get the contract
+      const contract = getContract(); // Ensure getContract is correctly set up
+
+      // Get the provider from the window.ethereum object (Web3Provider)
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+
+      // Get the signer (connected wallet) from the provider
+      const signer = provider.getSigner();
+
+      // Get the player's address (signer's address)
+      const playerAddress = await signer.getAddress();
+
+      // Call the contract's handleClaim function, passing the player address and score
+      const tx = await contract.handleClaim(playerAddress, score);
+
+      // Wait for the transaction to be mined
+      await tx.wait();
+
+      // Notify the user of the successful claim
+      toast.success("Reward claimed successfully!");
+    } catch (error) {
+      toast.error("There was an error claiming the reward.");
+      console.error(error);
+    }
+  };
+
   // Restart the game
   const restartGame = () => {
     setGameOver(false);
@@ -261,13 +307,13 @@ const ArenaGame: React.FC<ArenaGameProps> = ({ selectedCharacter }) => {
                 Game Over
               </motion.h1>
               <p className="mt-4 text-lg text-gray-300">
-                Accumulated <span className="text-yellow-400 font-bold">$MUFF</span> Tokens:{" "}
+                Accumulated <span className="text-yellow-400 font-bold">$MB</span> Tokens:{" "}
                 <span className="text-yellow-400 font-bold">{score}</span>
               </p>
 
               {/* Claim Button */}
               <motion.button
-                onClick={() => setHasClaimed(true)}
+                onClick={() => handleClaim(score)}
                 className="mt-6 bg-blue-500 hover:bg-green-500 text-white hover:text-black font-bold py-3 px-8 rounded-lg shadow-md border-2 border-yellow-300"
                 whileHover={{
                   scale: 1.1,
@@ -277,7 +323,7 @@ const ArenaGame: React.FC<ArenaGameProps> = ({ selectedCharacter }) => {
                 }}
                 whileTap={{ scale: 0.95 }}
               >
-                Claim $MUFF
+                Claim $MB
               </motion.button>
 
               {/* Restart Button (Initially Disabled) */}
