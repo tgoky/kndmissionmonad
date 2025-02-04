@@ -15,7 +15,7 @@ const Accelerate = () => {
       id: "twitter",
       title: "Follow us on Twitter",
       description: "Start accelerating with us on X!",
-      link: "https://x.com/blockhashlabs",
+      link: "https://x.com/muffledbird",
       buttonText: "Follow on X",
       completed: false,
     },
