@@ -66,9 +66,9 @@ const Leaderboard = () => {
                   <td className="px-4 py-2 flex items-center">
                     {item.score}
                     {index > 0 && item.score > leaderboard[index - 1].score ? (
-                      <FaArrowUp style={{ marginLeft: "0.5rem", color: "rgb(34 197 94)" }} />
+                      <FaArrowUp className="ml-2 text-green-500" />
                     ) : index < leaderboard.length - 1 && item.score < leaderboard[index + 1].score ? (
-                      <FaArrowDown style={{ marginLeft: "0.5rem", color: "rgb(239 68 68)" }} />
+                      <FaArrowDown className="ml-2 text-red-500" />
                     ) : null}
                   </td>
                 </tr>
