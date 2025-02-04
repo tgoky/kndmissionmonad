@@ -187,6 +187,9 @@ const ArenaGame: React.FC<ArenaGameProps> = ({ selectedCharacter }) => {
       // Wait for the transaction to be mined
       await tx.wait();
 
+      // Disable claim button and show restart button
+      setHasClaimed(true);
+
       // Notify the user of the successful claim
       toast.success("Reward claimed successfully!");
     } catch (error) {
@@ -202,6 +205,7 @@ const ArenaGame: React.FC<ArenaGameProps> = ({ selectedCharacter }) => {
     setObstacles([]);
     setGems([]);
     setScore(0);
+    setHasClaimed(false);
     if (gameStartSound) gameStartSound.play();
   };
 
@@ -314,14 +318,20 @@ const ArenaGame: React.FC<ArenaGameProps> = ({ selectedCharacter }) => {
               {/* Claim Button */}
               <motion.button
                 onClick={() => handleClaim(score)}
-                className="mt-6 bg-blue-500 hover:bg-green-500 text-white hover:text-black font-bold py-3 px-8 rounded-lg shadow-md border-2 border-yellow-300"
-                whileHover={{
-                  scale: 1.1,
-                  backgroundColor: "rgb(255, 223, 0)",
-                  color: "black",
-                  boxShadow: "0px 0px 15px rgba(255, 223, 0, 0.8)",
-                }}
-                whileTap={{ scale: 0.95 }}
+                className={`mt-6 font-bold py-3 px-8 rounded-lg shadow-md border-2 border-yellow-300 
+  ${hasClaimed ? "bg-gray-500 text-gray-300 cursor-not-allowed" : "bg-blue-500 hover:bg-green-500 text-white hover:text-black"}`}
+                whileHover={
+                  hasClaimed
+                    ? {}
+                    : {
+                        scale: 1.1,
+                        backgroundColor: "rgb(255, 223, 0)",
+                        color: "black",
+                        boxShadow: "0px 0px 15px rgba(255, 223, 0, 0.8)",
+                      }
+                }
+                whileTap={hasClaimed ? {} : { scale: 0.95 }}
+                disabled={hasClaimed} // Disable after claiming
               >
                 Claim $MB
               </motion.button>
@@ -330,10 +340,10 @@ const ArenaGame: React.FC<ArenaGameProps> = ({ selectedCharacter }) => {
               <motion.button
                 onClick={restartGame}
                 className={`mt-6 font-bold py-3 px-8 rounded-lg shadow-md border-2 border-yellow-300 
-            ${hasClaimed ? "bg-blue-500 hover:bg-yellow-400 text-white hover:text-black" : "bg-gray-500 text-gray-300 cursor-not-allowed"}`}
+  ${hasClaimed ? "bg-blue-500 hover:bg-yellow-400 text-white hover:text-black" : "bg-gray-500 text-gray-300 cursor-not-allowed"}`}
                 whileHover={hasClaimed ? { scale: 1.1, boxShadow: "0px 0px 15px rgba(255, 223, 0, 0.8)" } : {}}
                 whileTap={hasClaimed ? { scale: 0.95 } : {}}
-                disabled={!hasClaimed} // Disable when hasn't claimed
+                disabled={!hasClaimed} // Enable only after claiming
               >
                 Restart
               </motion.button>
