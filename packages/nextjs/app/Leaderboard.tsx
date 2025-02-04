@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { FaArrowDown, FaArrowUp } from "react-icons/fa";
 
-// Dummy function to generate a random wallet address (this is just for demonstration)
 const generateRandomAddress = () => {
   const characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
   let address = "0x";
@@ -11,7 +10,6 @@ const generateRandomAddress = () => {
   return address;
 };
 
-// Dummy function to generate a random score between 1 and 1000
 const generateRandomScore = () => Math.floor(Math.random() * 1000);
 
 interface LeaderboardItem {
@@ -23,7 +21,6 @@ const Leaderboard = () => {
   const [leaderboard, setLeaderboard] = useState<LeaderboardItem[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
-  // Generate dummy leaderboard data
   useEffect(() => {
     const generateDummyLeaderboard = () => {
       const dummyLeaderboard: LeaderboardItem[] = [];
@@ -33,8 +30,6 @@ const Leaderboard = () => {
           score: generateRandomScore(),
         });
       }
-
-      // Sort leaderboard by score in descending order
       dummyLeaderboard.sort((a, b) => b.score - a.score);
       setLeaderboard(dummyLeaderboard);
       setLoading(false);
@@ -58,7 +53,7 @@ const Leaderboard = () => {
               <tr className="text-lg font-semibold text-gray-300">
                 <th className="px-4 py-2">Rank</th>
                 <th className="px-4 py-2">Wallet Address</th>
-                <th className="px-4 py-2 ">Score</th>
+                <th className="px-4 py-2">Score</th>
               </tr>
             </thead>
             <tbody>
