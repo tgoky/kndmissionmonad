@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { FaArrowDown, FaArrowUp } from "react-icons/fa";
 
 const generateRandomAddress = () => {
   const characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -63,14 +62,7 @@ const Leaderboard = () => {
                   <td className="px-4 py-2 text-sm">
                     {item.walletAddress.slice(0, 6)}...{item.walletAddress.slice(-4)}
                   </td>
-                  <td className="px-4 py-2 flex items-center">
-                    {item.score}
-                    {index > 0 && item.score > leaderboard[index - 1].score ? (
-                      <FaArrowUp className="ml-2 text-green-500" />
-                    ) : index < leaderboard.length - 1 && item.score < leaderboard[index + 1].score ? (
-                      <FaArrowDown className="ml-2 text-red-500" />
-                    ) : null}
-                  </td>
+                  <td className="px-4 py-2 flex items-center">{item.score}</td>
                 </tr>
               ))}
             </tbody>
