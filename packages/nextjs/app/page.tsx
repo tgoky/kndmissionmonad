@@ -104,7 +104,7 @@ const HomePage = () => {
       <div className="flex flex-col items-center justify-center flex-grow">
         {!missionStarted ? (
           <>
-            <h1 className="text-4xl font-bold mb-8">Kids Next Door: Mission Monad</h1>
+            <h1 className="text-4xl font-bold mb-8">Muffled Birdie: Mission Monad</h1>
             <h1 className="text-2xl font-bold mb-8">Select your character and Start Mission </h1>
             <div ref={gridRef} className="grid grid-cols-2 md:grid-cols-3 gap-6">
               {characters.map((char, index) => (

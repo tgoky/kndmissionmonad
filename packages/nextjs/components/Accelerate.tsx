@@ -7,7 +7,7 @@ import { CheckCircle } from "lucide-react";
 // Optional: You can use any icon library for the tick icon.
 
 const Accelerate = () => {
-  const image = { src: "/backshot.PNG", alt: "Birdy Tasks" };
+  const image = { src: "/mmmfd.jpeg", alt: "Birdy Tasks" };
 
   // Task state to track completion
   const [tasks, setTasks] = useState([
@@ -39,10 +39,10 @@ const Accelerate = () => {
 
   return (
     <div className="min-h-screen bg-yellow-500 flex flex-col items-center p-6">
-      <h1 className="text-4xl font-bold text-white mb-8 font-modak">Accelerate Starter Pack</h1>
+      <h1 className="text-4xl font-bold text-black mb-8 font-modak">be a muffled bird on monad !</h1>
 
       {/* Single Rectangle Card */}
-      <div className="bg-orange-800 shadow-lg hover:shadow-xl transition rounded-lg overflow-hidden w-full max-w-5xl">
+      <div className="bg-black shadow-lg hover:shadow-xl transition rounded-lg overflow-hidden w-full max-w-5xl">
         {/* Single Image */}
         <img src={image.src} alt={image.alt} className="object-cover w-full h-64" />
 

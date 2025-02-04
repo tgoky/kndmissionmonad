@@ -261,7 +261,7 @@ const ArenaGame: React.FC<ArenaGameProps> = ({ selectedCharacter }) => {
                 Game Over
               </motion.h1>
               <p className="mt-4 text-lg text-gray-300">
-                Accumulated <span className="text-yellow-400 font-bold">$KND</span> Tokens:{" "}
+                Accumulated <span className="text-yellow-400 font-bold">$MUFF</span> Tokens:{" "}
                 <span className="text-yellow-400 font-bold">{score}</span>
               </p>
 
@@ -277,7 +277,7 @@ const ArenaGame: React.FC<ArenaGameProps> = ({ selectedCharacter }) => {
                 }}
                 whileTap={{ scale: 0.95 }}
               >
-                Claim $KND
+                Claim $MUFF
               </motion.button>
 
               {/* Restart Button (Initially Disabled) */}

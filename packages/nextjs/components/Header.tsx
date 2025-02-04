@@ -102,7 +102,7 @@ export const Header = () => {
           className="btn btn-primary text-white bg-black font-bold px-6 py-2 rounded-full"
           onClick={() => setIsModalOpen(true)}
         >
-          Earn XP on Kids Next Door : Mission Monad
+          Earn XP on Muffled Birds : Mission Monad
         </button>
       </div>
       <div className="navbar-end flex-grow mr-4 flex items-center space-x-4">
