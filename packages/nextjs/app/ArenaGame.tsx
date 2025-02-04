@@ -37,6 +37,7 @@ const ArenaGame: React.FC<ArenaGameProps> = ({ selectedCharacter }) => {
   const [gameOverSound, setGameOverSound] = useState<HTMLAudioElement | null>(null);
   const [gameStartSound, setGameStartSound] = useState<HTMLAudioElement | null>(null);
   const [floatingPoints, setFloatingPoints] = useState<{ id: number; x: number; y: number }[]>([]);
+  const [exitGame, setExitGame] = useState(false);
 
   // Load sounds only on the client side
   useEffect(() => {
@@ -103,6 +104,12 @@ const ArenaGame: React.FC<ArenaGameProps> = ({ selectedCharacter }) => {
     return () => clearInterval(interval);
   }, [gameOver]);
 
+  useEffect(() => {
+    if (exitGame) {
+      setTimeout(() => window.location.reload(), 500); // Simulate going to the main menu
+    }
+  }, [exitGame]);
+
   // Move obstacles downward
   useEffect(() => {
     const moveObstacles = setInterval(() => {
@@ -146,6 +153,14 @@ const ArenaGame: React.FC<ArenaGameProps> = ({ selectedCharacter }) => {
     setGems([]);
     setScore(0);
     if (gameStartSound) gameStartSound.play();
+  };
+
+  const handleExit = () => {
+    if (score > 0 && !hasClaimed) {
+      toast.info("You have earned tokens! Claim them before exiting.");
+    } else {
+      setExitGame(true);
+    }
   };
 
   return (
@@ -263,6 +278,25 @@ const ArenaGame: React.FC<ArenaGameProps> = ({ selectedCharacter }) => {
                 disabled={!hasClaimed} // Disable when hasn't claimed
               >
                 Restart
+              </motion.button>
+              <AnimatePresence>
+                {exitGame && (
+                  <motion.div
+                    className="absolute inset-0 flex justify-center items-center bg-black bg-opacity-80"
+                    initial={{ opacity: 1 }}
+                    animate={{ opacity: 0 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.5, ease: "easeOut" }}
+                    onAnimationComplete={() => window.location.reload()} // Simulate navigation to the main menu
+                  />
+                )}
+              </AnimatePresence>
+              <motion.button
+                onClick={handleExit}
+                className="mt-4 bg-red-500 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-lg"
+                whileHover={{ scale: 1.1 }}
+              >
+                Exit to Main Menu
               </motion.button>
             </motion.div>
           </motion.div>
