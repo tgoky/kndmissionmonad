@@ -27,6 +27,7 @@ const gemImages = [
 ];
 
 const ArenaGame: React.FC<ArenaGameProps> = ({ selectedCharacter }) => {
+  const [hasClaimed, setHasClaimed] = useState(false);
   const [playerPosition, setPlayerPosition] = useState({ x: 50, y: 80 });
   const [obstacles, setObstacles] = useState<{ x: number; y: number; id: number }[]>([]);
   const [gems, setGems] = useState<{ x: number; y: number; id: number; image: string }[]>([]);
@@ -206,6 +207,7 @@ const ArenaGame: React.FC<ArenaGameProps> = ({ selectedCharacter }) => {
       ))}
 
       {/* Game Over Modal */}
+      {/* Game Over Modal */}
       <AnimatePresence>
         {gameOver && (
           <motion.div
@@ -216,28 +218,49 @@ const ArenaGame: React.FC<ArenaGameProps> = ({ selectedCharacter }) => {
             transition={{ duration: 0.5, ease: "easeOut" }}
           >
             <motion.div
-              className="bg-gray-800 text-white p-8 rounded-lg shadow-lg flex flex-col items-center"
+              className="bg-gray-900 text-white p-10 rounded-lg shadow-2xl border-4 border-yellow-400 flex flex-col items-center"
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 50 }}
               transition={{ duration: 0.5, ease: "easeOut" }}
+              whileHover={{ scale: 1.05, boxShadow: "0px 0px 20px rgba(255, 223, 0, 0.6)" }}
             >
               <motion.h1
-                className="text-4xl font-bold text-red-500"
+                className="text-5xl font-extrabold text-red-500 drop-shadow-lg"
                 initial={{ scale: 0.5, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ duration: 0.5, ease: "easeOut" }}
+                animate={{ scale: 1.1, opacity: 1 }}
+                transition={{ duration: 0.6, ease: "easeOut", type: "spring", stiffness: 120 }}
               >
                 Game Over
               </motion.h1>
-              <p className="mt-4 text-lg">
-                Your final score: <span className="text-yellow-400">{score}</span>
+              <p className="mt-4 text-lg text-gray-300">
+                Accumulated <span className="text-yellow-400 font-bold">$KND</span> Tokens:{" "}
+                <span className="text-yellow-400 font-bold">{score}</span>
               </p>
+
+              {/* Claim Button */}
+              <motion.button
+                onClick={() => setHasClaimed(true)}
+                className="mt-6 bg-blue-500 hover:bg-green-500 text-white hover:text-black font-bold py-3 px-8 rounded-lg shadow-md border-2 border-yellow-300"
+                whileHover={{
+                  scale: 1.1,
+                  backgroundColor: "rgb(255, 223, 0)",
+                  color: "black",
+                  boxShadow: "0px 0px 15px rgba(255, 223, 0, 0.8)",
+                }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Claim $KND
+              </motion.button>
+
+              {/* Restart Button (Initially Disabled) */}
               <motion.button
                 onClick={restartGame}
-                className="mt-6 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-lg shadow-md"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
+                className={`mt-6 font-bold py-3 px-8 rounded-lg shadow-md border-2 border-yellow-300 
+              ${hasClaimed ? "bg-blue-500 hover:bg-yellow-400 text-white hover:text-black" : "bg-gray-500 text-gray-300 cursor-not-allowed"}`}
+                whileHover={hasClaimed ? { scale: 1.1, boxShadow: "0px 0px 15px rgba(255, 223, 0, 0.8)" } : {}}
+                whileTap={hasClaimed ? { scale: 0.95 } : {}}
+                disabled={!hasClaimed} // Disable when hasn't claimed
               >
                 Restart
               </motion.button>
