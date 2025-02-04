@@ -38,7 +38,7 @@ const Accelerate = () => {
   };
 
   return (
-    <div className="min-h-screen bg-yellow-500 flex flex-col items-center p-6">
+    <div className="min-h-screen bg-black flex flex-col items-center p-6">
       <h1 className="text-4xl font-bold text-black mb-8 font-modak">be a muffled bird on monad !</h1>
 
       {/* Single Rectangle Card */}
