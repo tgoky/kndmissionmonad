@@ -2,19 +2,16 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { CheckCircle } from "lucide-react";
-
-// Optional: You can use any icon library for the tick icon.
 
 const Accelerate = () => {
-  const image = { src: "/mmmfd.jpeg", alt: "Birdy Tasks" };
+  const image = { src: "/hmm.PNG", alt: "Birdy Tasks" };
 
-  // Task state to track completion
-  const [tasks, setTasks] = useState([
+  // Initialize tasks with default state (not completed)
+  const initialTasks = [
     {
       id: "twitter",
       title: "Follow us on Twitter",
-      description: "Start accelerating with us on X!",
+      description: "Stay updated with our latest announcements and updates.",
       link: "https://x.com/muffledbird",
       buttonText: "Follow on X",
       completed: false,
@@ -22,35 +19,50 @@ const Accelerate = () => {
     {
       id: "telegram",
       title: "Join our Telegram",
-      description: "Accelerate with the community on TG",
+      description: "Be part of the discussion and get real-time updates.",
       link: "https://t.me/yourtelegram",
       buttonText: "Join Telegram",
       completed: false,
     },
-  ]);
+    {
+      id: "discord",
+      title: "Join our Discord",
+      description: "Engage with the community, get roles and find helpful resources.",
+      link: "https://discord.gg/yourdiscord",
+      buttonText: "Join Discord",
+      completed: false,
+    },
+  ];
 
-  // Simulated verification function
-  const verifyTask = (taskId: string) => {
-    // Simulate verification (e.g., via an API call to check if the user followed/joined)
+  const [tasks, setTasks] = useState(initialTasks);
+
+  // Simulate verification logic
+  const handleVerify = (id: string) => {
+    // Simulate an API call or check for task completion
     setTimeout(() => {
-      setTasks(prevTasks => prevTasks.map(task => (task.id === taskId ? { ...task, completed: true } : task)));
-    }, 1000); // Simulate API delay
+      setTasks(prevTasks => prevTasks.map(task => (task.id === id ? { ...task, completed: true } : task)));
+    }, 1000); // Simulate delay for verification
   };
 
   return (
-    <div className="min-h-screen bg-black flex flex-col items-center p-6">
-      <h1 className="text-4xl font-bold text-black mb-8 font-modak">be a muffled bird on monad !</h1>
-
+    <div className="min-h-screen bg-gray-900 flex flex-col items-center p-6">
+      <h1 className="text-4xl font-bold text-white mb-8 " style={{ fontFamily: "'Rubik Scribble', sans-serif" }}>
+        Be a Muffled Bird!
+      </h1>
+      <h1 className="text-1xl font-bold text-white mb-8">
+        notice: its peremptory to follow instructions and become a full fledged muffled bird
+      </h1>
+      <h1 className="text-1x font-bold text-purple-500 mb-8">we would love to build an eligible community with you </h1>
       {/* Single Rectangle Card */}
-      <div className="bg-black shadow-lg hover:shadow-xl transition rounded-lg overflow-hidden w-full max-w-5xl">
+      <div className="bg-gray-800 shadow-lg hover:shadow-xl transition rounded-lg overflow-hidden w-full max-w-5xl">
         {/* Single Image */}
         <img src={image.src} alt={image.alt} className="object-cover w-full h-64" />
 
         {/* Tasks Section */}
         <div className="p-6">
-          {tasks.map(task => (
+          {tasks.map((task, index) => (
             <div
-              key={task.id}
+              key={index}
               className="flex flex-col md:flex-row md:items-center justify-between mb-6 border-b border-gray-700 pb-4 last:border-b-0"
             >
               <div className="mb-4 md:mb-0">
@@ -59,23 +71,22 @@ const Accelerate = () => {
               </div>
 
               {!task.completed ? (
-                // If task is not completed
-                <Link
-                  href={task.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  passHref
-                  onClick={() => verifyTask(task.id)} // Trigger verification on click
-                >
-                  <button className="bg-green-500 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded-lg">
-                    {task.buttonText}
+                <div className="flex gap-2">
+                  <Link href={task.link} target="_blank" rel="noopener noreferrer" passHref>
+                    <button className="bg-pink-500 hover:bg-purple-600 text-white font-semibold py-2 px-4 rounded-lg">
+                      {task.buttonText}
+                    </button>
+                  </Link>
+                  <button
+                    onClick={() => handleVerify(task.id)}
+                    className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg"
+                  >
+                    Verify
                   </button>
-                </Link>
+                </div>
               ) : (
-                // If task is completed, show "Done" with a tick
-                <div className="flex items-center space-x-2">
-                  <CheckCircle className="text-green-500 w-6 h-6" />
-                  <span className="text-green-500 font-semibold">Done</span>
+                <div className="flex items-center gap-2">
+                  <span className="text-green-500 font-semibold">✔ Done</span>
                 </div>
               )}
             </div>

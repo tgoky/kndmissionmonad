@@ -186,26 +186,64 @@ const HomePage = () => {
           Character game pass fee : <span className="animate-pulse text-yellow-400 font-bold">0.34 MON</span>
         </p>
         <button
-          className="w-4/5 py-3 mb-4 text-left px-4 text-white border border-gray-500 border-dashed hover:bg-green-500 transition-all"
+          className="relative w-4/5 py-3 mb-4 text-left px-4 text-white text-lg font-semibold 
+  border border-gray-700 rounded-lg bg-gradient-to-br from-gray-900 to-gray-800 
+  shadow-[4px_4px_10px_rgba(255,255,255,0.2)] 
+  transition-all duration-300 ease-in-out hover:scale-105 active:scale-95 
+  before:absolute before:top-0 before:left-0 before:w-1/3 before:h-0.5 before:bg-white before:rounded-full 
+  after:absolute after:bottom-0 after:right-0 after:w-1/3 after:h-0.5 after:bg-white after:rounded-full 
+  hover:before:w-1/2 hover:after:w-1/2 hover:shadow-[6px_6px_20px_rgba(0,255,150,0.7)]"
           onClick={startMission}
         >
           Start Mission
         </button>
+
         <button
-          className="w-4/5 py-3 mb-4 text-left px-4 text-white border border-gray-500 border-dashed hover:bg-yellow-500 transition-all"
+          className="relative w-4/5 py-3 mb-4 text-left px-4 text-white text-lg font-semibold 
+  border border-gray-700 rounded-lg bg-gradient-to-br from-gray-900 to-gray-800 
+  shadow-[4px_4px_10px_rgba(255,255,255,0.2)] 
+  transition-all duration-300 ease-in-out hover:scale-105 active:scale-95 
+  before:absolute before:top-0 before:right-0 before:w-1/3 before:h-0.5 before:bg-yellow-500 before:rounded-full 
+  after:absolute after:bottom-0 after:left-0 after:w-1/3 after:h-0.5 after:bg-yellow-500 after:rounded-full 
+  hover:before:w-1/2 hover:after:w-1/2 hover:shadow-[6px_6px_20px_rgba(255,200,50,0.7)]"
           onClick={toggleLeaderboard}
         >
           {showLeaderboard ? "Go back to home" : "Leaderboard"}
         </button>
-        <button className="w-4/5 py-3 mb-4 text-left px-4 text-white border border-gray-500 border-dashed hover:bg-yellow-500 transition-all">
+
+        <button
+          className="relative w-4/5 py-3 mb-4 text-left px-4 text-white text-lg font-semibold 
+  border border-gray-700 rounded-lg bg-gradient-to-br from-gray-900 to-gray-800 
+  shadow-[4px_4px_10px_rgba(255,255,255,0.2)] 
+  transition-all duration-300 ease-in-out hover:scale-105 active:scale-95 
+  before:absolute before:top-0 before:right-0 before:w-1/3 before:h-0.5 before:bg-cyan-400 before:rounded-full 
+  after:absolute after:bottom-0 after:left-0 after:w-1/3 after:h-0.5 after:bg-cyan-400 after:rounded-full 
+  hover:before:w-1/2 hover:after:w-1/2 hover:shadow-[6px_6px_20px_rgba(0,255,255,0.7)]"
+        >
           Multiplayer
         </button>
-        <button className="w-4/5 py-3 mb-4 text-left px-4 text-white border border-gray-500 border-dashed hover:bg-yellow-500 transition-all">
+
+        <button
+          className="relative w-4/5 py-3 mb-4 text-left px-4 text-white text-lg font-semibold 
+  border border-gray-700 rounded-lg bg-gradient-to-br from-gray-900 to-gray-800 
+  shadow-[4px_4px_10px_rgba(255,255,255,0.2)] 
+  transition-all duration-300 ease-in-out hover:scale-105 active:scale-95 
+  before:absolute before:top-0 before:right-0 before:w-1/3 before:h-0.5 before:bg-pink-500 before:rounded-full 
+  after:absolute after:bottom-0 after:left-0 after:w-1/3 after:h-0.5 after:bg-pink-500 after:rounded-full 
+  hover:before:w-1/2 hover:after:w-1/2 hover:shadow-[6px_6px_20px_rgba(255,100,250,0.7)]"
+        >
           Settings
         </button>
+
         <button
-          className="w-4/5 py-3 mb-4 text-left px-4 text-white border border-gray-500 border-dashed hover:bg-red-500 transition-all"
-          onClick={handleEndGame} // Handle "End Game" button click
+          className="relative w-4/5 py-3 mb-4 text-left px-4 text-white text-lg font-semibold 
+  border border-gray-700 rounded-lg bg-gradient-to-br from-gray-900 to-gray-800 
+  shadow-[4px_4px_10px_rgba(255,255,255,0.2)] 
+  transition-all duration-300 ease-in-out hover:scale-105 active:scale-95 
+  before:absolute before:top-0 before:right-0 before:w-1/3 before:h-0.5 before:bg-red-500 before:rounded-full 
+  after:absolute after:bottom-0 after:left-0 after:w-1/3 after:h-0.5 after:bg-red-500 after:rounded-full 
+  hover:before:w-1/2 hover:after:w-1/2 hover:shadow-[6px_6px_20px_rgba(255,50,50,0.7)]"
+          onClick={handleEndGame}
         >
           End Game
         </button>

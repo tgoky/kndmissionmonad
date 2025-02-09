@@ -232,7 +232,9 @@ const ArenaGame: React.FC<ArenaGameProps> = ({ selectedCharacter }) => {
         initial={{ scale: 1, opacity: 0.6 }}
         animate={{ scale: 1.4, opacity: 1 }}
         transition={{ duration: 0.3 }}
-        className="absolute top-6 text-yellow-400 font-bold text-3xl tracking-widest drop-shadow-lg"
+        className="absolute top-6 left-1/2 translate-x-[20%] text-yellow-400 font-extrabold text-4xl 
+        tracking-widest drop-shadow-[4px_4px_0px_rgba(255,100,0,1)] 
+        shadow-[0_0_20px_rgba(255,255,0,0.8)] outline-none uppercase"
       >
         Score: {score}
       </motion.h2>
@@ -303,35 +305,43 @@ const ArenaGame: React.FC<ArenaGameProps> = ({ selectedCharacter }) => {
               whileHover={{ scale: 1.05, boxShadow: "0px 0px 20px rgba(255, 223, 0, 0.6)" }}
             >
               <motion.h1
-                className="text-5xl font-extrabold text-red-500 drop-shadow-lg"
+                className="text-6xl font-extrabold text-red-500 uppercase 
+                drop-shadow-[6px_6px_0px_rgba(0,0,0,1)] 
+                shadow-[0_0_25px_rgba(255,0,0,0.8)] tracking-widest 
+                animate-pulse"
                 initial={{ scale: 0.5, opacity: 0 }}
                 animate={{ scale: 1.1, opacity: 1 }}
                 transition={{ duration: 0.6, ease: "easeOut", type: "spring", stiffness: 120 }}
               >
                 Game Over
               </motion.h1>
-              <p className="mt-4 text-lg text-gray-300">
-                Accumulated <span className="text-yellow-400 font-bold">$MB</span> Tokens:{" "}
-                <span className="text-yellow-400 font-bold">{score}</span>
+              <p className="mt-4 text-xl font-semibold text-gray-300 bg-gray-900/60 px-4 py-2 rounded-lg shadow-lg">
+                Accumulated <span className="text-yellow-400 font-extrabold drop-shadow-md">$MB</span> Tokens:{" "}
+                <span className="text-yellow-400 font-extrabold drop-shadow-md">{score}</span>
               </p>
 
               {/* Claim Button */}
               <motion.button
                 onClick={() => handleClaim(score)}
-                className={`mt-6 font-bold py-3 px-8 rounded-lg shadow-md border-2 border-yellow-300 
-  ${hasClaimed ? "bg-gray-500 text-gray-300 cursor-not-allowed" : "bg-blue-500 hover:bg-green-500 text-white hover:text-black"}`}
+                className={`relative mt-6 font-extrabold py-3 px-8 rounded-lg border-2 border-green-400 
+  text-xl uppercase tracking-widest transition-all duration-300 ease-in-out
+  ${
+    hasClaimed
+      ? "bg-gray-600 text-gray-300 cursor-not-allowed shadow-[0_6px_0_#444]"
+      : "bg-gradient-to-b from-green-500 to-green-700 text-white shadow-[0_6px_0_#166534] hover:shadow-[0_4px_0_#166534] active:shadow-[0_2px_0_#166534] active:translate-y-1"
+  }`}
                 whileHover={
                   hasClaimed
                     ? {}
                     : {
-                        scale: 1.1,
-                        backgroundColor: "rgb(255, 223, 0)",
+                        scale: 1.05,
+                        backgroundColor: "rgb(255, 223, 0)", // Turns gold on hover
                         color: "black",
-                        boxShadow: "0px 0px 15px rgba(255, 223, 0, 0.8)",
+                        boxShadow: "0px 0px 20px rgba(255, 223, 0, 0.9)", // Glowing effect
                       }
                 }
                 whileTap={hasClaimed ? {} : { scale: 0.95 }}
-                disabled={hasClaimed} // Disable after claiming
+                disabled={hasClaimed}
               >
                 Claim $MB
               </motion.button>
@@ -339,14 +349,20 @@ const ArenaGame: React.FC<ArenaGameProps> = ({ selectedCharacter }) => {
               {/* Restart Button (Initially Disabled) */}
               <motion.button
                 onClick={restartGame}
-                className={`mt-6 font-bold py-3 px-8 rounded-lg shadow-md border-2 border-yellow-300 
-  ${hasClaimed ? "bg-blue-500 hover:bg-yellow-400 text-white hover:text-black" : "bg-gray-500 text-gray-300 cursor-not-allowed"}`}
-                whileHover={hasClaimed ? { scale: 1.1, boxShadow: "0px 0px 15px rgba(255, 223, 0, 0.8)" } : {}}
+                className={`relative mt-6 font-extrabold py-3 px-8 rounded-lg border-2 border-yellow-400 
+  text-xl uppercase tracking-widest transition-all duration-300 ease-in-out 
+  ${
+    hasClaimed
+      ? "bg-gradient-to-b from-yellow-300 to-yellow-500 text-black shadow-[0_6px_0_#b8860b] hover:shadow-[0_4px_0_#b8860b] active:shadow-[0_2px_0_#b8860b] active:translate-y-1"
+      : "bg-gray-600 text-gray-300 cursor-not-allowed shadow-[0_6px_0_#444]"
+  }`}
+                whileHover={hasClaimed ? { scale: 1.05 } : {}}
                 whileTap={hasClaimed ? { scale: 0.95 } : {}}
-                disabled={!hasClaimed} // Enable only after claiming
+                disabled={!hasClaimed}
               >
                 Restart
               </motion.button>
+
               <AnimatePresence>
                 {exitGame && (
                   <motion.div
@@ -361,7 +377,9 @@ const ArenaGame: React.FC<ArenaGameProps> = ({ selectedCharacter }) => {
               </AnimatePresence>
               <motion.button
                 onClick={handleExit}
-                className="mt-4 bg-red-500 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-lg"
+                className="mt-4 bg-red-600 hover:bg-red-700 text-white font-extrabold py-3 px-8 rounded-lg text-lg 
+                tracking-wide transition-all duration-300 ease-in-out
+                shadow-[0_5px_0_#991b1b] hover:shadow-[0_3px_0_#991b1b] active:shadow-[0_1px_0_#991b1b] active:translate-y-1"
                 whileHover={{ scale: 1.1 }}
               >
                 Exit to Main Menu

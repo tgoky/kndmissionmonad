@@ -46,7 +46,7 @@ export const Footer = () => {
             <div className="text-center">
               {/* TODO: add the scaffold-eth-monad repo link */}
               <a href="https://x.com/muffledbird" target="_blank" rel="noreferrer" className="link">
-                .
+                Muffled Bird
               </a>
             </div>
             <span>·</span>

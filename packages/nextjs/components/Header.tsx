@@ -99,7 +99,9 @@ export const Header = () => {
       {/* Center Menu for Modal */}
       <div className="navbar-center">
         <button
-          className="btn btn-primary text-white bg-black font-bold px-6 py-2 rounded-full"
+          className="relative bg-black text-white font-bold px-6 py-2 rounded-full border-4 border-gray-700 shadow-[4px_4px_0px_#1f1f1f] 
+  transition-all duration-200 ease-in-out hover:shadow-[2px_2px_0px_#2d2d2d] hover:translate-x-[1px] hover:translate-y-[1px] 
+  active:shadow-[1px_1px_0px_#3b3b3b] active:translate-x-[2px] active:translate-y-[2px]"
           onClick={() => setIsModalOpen(true)}
         >
           Earn XP on Muffled Birds : Mission Monad
