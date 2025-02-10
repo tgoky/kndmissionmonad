@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import contractABI from "./abi/ards.json";
+import mbABI from "./abi/mb.json";
 import { ethers } from "ethers";
 import { AnimatePresence, motion } from "framer-motion";
 import { toast } from "react-toastify";
@@ -16,6 +17,22 @@ interface Character {
 }
 
 const contractAddress = "0x706e51256096F5aabA58A55B4e2B17416968E7D2";
+
+const mb = "0xCF078031f890Ed361442e09ebA6Ec255A47d6E72";
+
+const getMB = () => {
+  if (typeof window === "undefined" || !window.ethereum) {
+    throw new Error("Ethereum provider not found");
+  }
+
+  // Use Web3Provider for connecting to MetaMask
+  const provider = new ethers.providers.Web3Provider(window.ethereum); // This is a Web3Provider, not a generic Provider
+
+  // Get the signer (which is needed for sending transactions)
+  const signer = provider.getSigner();
+
+  return new ethers.Contract(mb, mbABI, signer);
+};
 
 const getContract = () => {
   if (typeof window === "undefined" || !window.ethereum) {
@@ -198,6 +215,35 @@ const ArenaGame: React.FC<ArenaGameProps> = ({ selectedCharacter }) => {
     }
   };
 
+  const [balance, setBalance] = useState<number>(0);
+
+  // Function to fetch token balance
+  const fetchBalance = async () => {
+    try {
+      const contract = getMB();
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const signer = provider.getSigner();
+      const playerAddress = await signer.getAddress();
+
+      // Call the contract method to get the balance
+      const balanceBigNumber = await contract.balanceOf(playerAddress);
+
+      // Convert balance from BigNumber to a readable format
+      const balanceFormatted = ethers.utils.formatUnits(balanceBigNumber, 18); // Assuming 18 decimals
+      setBalance(parseFloat(balanceFormatted));
+    } catch (error) {
+      console.error("Error fetching balance:", error);
+      toast.error("Failed to fetch token balance.");
+    }
+  };
+
+  // Fetch balance on mount and when score changes
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.ethereum) {
+      fetchBalance();
+    }
+  }, [score]); // Update when the score changes
+
   // Restart the game
   const restartGame = () => {
     setGameOver(false);
@@ -237,6 +283,17 @@ const ArenaGame: React.FC<ArenaGameProps> = ({ selectedCharacter }) => {
         shadow-[0_0_20px_rgba(255,255,0,0.8)] outline-none uppercase"
       >
         Score: {score}
+      </motion.h2>
+
+      <motion.h2
+        initial={{ scale: 1, opacity: 0.6 }}
+        animate={{ scale: 1.2, opacity: 1 }}
+        transition={{ duration: 0.3 }}
+        className="absolute top-6 right-6 text-green-400 font-extrabold text-xl 
+  tracking-widest drop-shadow-[4px_4px_0px_#9a2a9c] 
+        shadow-[0_0_20px_rgba(255,255,0,0.8)] outline-none uppercase"
+      >
+        💰: {balance} MB
       </motion.h2>
 
       <AnimatePresence>

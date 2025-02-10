@@ -13,7 +13,7 @@ async function main() {
   const totalSupply = ethers.parseEther("9990000000"); // 1,000,000 SZNS tokens
 
   // Compile and deploy the contract with _totalSupply
-  const XLR8 = await ethers.getContractFactory("MuffledBirdv1");
+  const XLR8 = await ethers.getContractFactory("MuffledBirdv2");
   const xlr8 = await XLR8.deploy(totalSupply);
 
   // Wait for deployment to be mined
