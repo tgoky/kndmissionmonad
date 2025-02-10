@@ -293,7 +293,7 @@ const ArenaGame: React.FC<ArenaGameProps> = ({ selectedCharacter }) => {
   tracking-widest drop-shadow-[4px_4px_0px_#9a2a9c] 
         shadow-[0_0_20px_rgba(255,255,0,0.8)] outline-none uppercase"
       >
-        💰: {balance} MB
+        💰: {balance} $MB
       </motion.h2>
 
       <AnimatePresence>
