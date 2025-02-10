@@ -255,7 +255,7 @@ const HomePage = () => {
           !missionStarted ? (
             <>
               <h1 className="text-5xl font-extrabold mb-6 text-center uppercase tracking-wide text-yellow-400 drop-shadow-[4px_4px_0px_rgba(255,50,0,1)]">
-                Muffled Birdie: Mission Monad
+                Muffled Birdy: Mission Monad
               </h1>
               <h1 className="text-2xl font-bold mb-8">Select your character and Start Mission</h1>
               <div ref={gridRef} className="grid grid-cols-2 md:grid-cols-3 gap-6">
