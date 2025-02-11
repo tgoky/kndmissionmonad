@@ -4,14 +4,13 @@ import React, { useState } from "react";
 import Link from "next/link";
 
 const Accelerate = () => {
-  const image = { src: "/hmm.PNG", alt: "Birdy Tasks" };
+  const image = { src: "/mmmfd.jpeg", alt: "Birdy Tasks" };
 
-  // Initialize tasks with default state (not completed)
   const initialTasks = [
     {
       id: "twitter",
       title: "Follow us on Twitter",
-      description: "Stay updated with our latest announcements and updates.",
+      description: "Stay updated with our latest updates.",
       link: "https://x.com/muffledbird",
       buttonText: "Follow on X",
       completed: false,
@@ -19,16 +18,16 @@ const Accelerate = () => {
     {
       id: "telegram",
       title: "Join our Telegram",
-      description: "Be part of the discussion and get real-time updates.",
-      link: "https://t.me/yourtelegram",
+      description: "Be part of the discussions",
+      link: "https://t.me/muffledbirdmarket",
       buttonText: "Join Telegram",
       completed: false,
     },
     {
       id: "discord",
       title: "Join our Discord",
-      description: "Engage with the community, get roles and find helpful resources.",
-      link: "https://discord.gg/yourdiscord",
+      description: "Engage with the community",
+      link: "https://discord.gg/WnYeg4Qxkz",
       buttonText: "Join Discord",
       completed: false,
     },
@@ -36,29 +35,26 @@ const Accelerate = () => {
 
   const [tasks, setTasks] = useState(initialTasks);
 
-  // Simulate verification logic
   const handleVerify = (id: string) => {
-    // Simulate an API call or check for task completion
     setTimeout(() => {
       setTasks(prevTasks => prevTasks.map(task => (task.id === id ? { ...task, completed: true } : task)));
-    }, 1000); // Simulate delay for verification
+    }, 1000);
   };
 
   return (
     <div className="min-h-screen bg-gray-900 flex flex-col items-center p-6">
-      <h1 className="text-4xl font-bold text-white mb-8 " style={{ fontFamily: "'Rubik Scribble', sans-serif" }}>
-        Be a Muffled Bird!
+      <h1 className="text-4xl font-bold text-white mb-6 neon-text">Be a Muffled Bird!</h1>
+      <h1 className="text-sm font-semibold text-white mb-6">
+        Notice: It’s peremptory to follow instructions and become a full-fledged muffled bird.
       </h1>
-      <h1 className="text-1xl font-bold text-white mb-8">
-        notice: its peremptory to follow instructions and become a full fledged muffled bird
+
+      <h1 className="text-lg font-semibold text-purple-500 mb-8">
+        We would love to build an eligible community with you!
       </h1>
-      <h1 className="text-1x font-bold text-purple-500 mb-8">we would love to build an eligible community with you </h1>
-      {/* Single Rectangle Card */}
-      <div className="bg-gray-800 shadow-lg hover:shadow-xl transition rounded-lg overflow-hidden w-full max-w-5xl">
-        {/* Single Image */}
+
+      <div className="bg-gray-800 shadow-xl rounded-lg overflow-hidden w-full max-w-5xl">
         <img src={image.src} alt={image.alt} className="object-cover w-full h-64" />
 
-        {/* Tasks Section */}
         <div className="p-6">
           {tasks.map((task, index) => (
             <div
@@ -71,28 +67,55 @@ const Accelerate = () => {
               </div>
 
               {!task.completed ? (
-                <div className="flex gap-2">
+                <div className="flex gap-3">
                   <Link href={task.link} target="_blank" rel="noopener noreferrer" passHref>
-                    <button className="bg-pink-500 hover:bg-purple-600 text-white font-semibold py-2 px-4 rounded-lg">
-                      {task.buttonText}
-                    </button>
+                    <button className="btn-3d bg-pink-500 hover:bg-pink-600">{task.buttonText}</button>
                   </Link>
-                  <button
-                    onClick={() => handleVerify(task.id)}
-                    className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg"
-                  >
+                  <button onClick={() => handleVerify(task.id)} className="btn-3d bg-blue-500 hover:bg-blue-600">
                     Verify
                   </button>
                 </div>
               ) : (
                 <div className="flex items-center gap-2">
-                  <span className="text-green-500 font-semibold">✔ Done</span>
+                  <span className="text-green-500 font-semibold text-lg">✔ Done</span>
                 </div>
               )}
             </div>
           ))}
         </div>
       </div>
+
+      <style jsx>{`
+        .neon-text {
+          text-shadow:
+            0 0 10px #ff00ff,
+            0 0 20px #ff00ff,
+            0 0 30px #ff00ff;
+        }
+        .btn-3d {
+          color: white;
+          font-weight: bold;
+          padding: 12px 24px;
+          border-radius: 12px;
+          box-shadow:
+            0 6px 0 rgba(0, 0, 0, 0.2),
+            0 10px 20px rgba(0, 0, 0, 0.3);
+          transition: all 0.2s ease-in-out;
+          transform: translateY(-2px);
+        }
+        .btn-3d:hover {
+          transform: translateY(-5px);
+          box-shadow:
+            0 10px 0 rgba(0, 0, 0, 0.2),
+            0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+        .btn-3d:active {
+          transform: translateY(2px);
+          box-shadow:
+            0 2px 0 rgba(0, 0, 0, 0.2),
+            0 5px 10px rgba(0, 0, 0, 0.3);
+        }
+      `}</style>
     </div>
   );
 };
