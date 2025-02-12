@@ -101,47 +101,17 @@ const HomePage = () => {
   };
 
   const startMission = async () => {
-    if (selected === null) {
-      toast.warning("Please select a character before starting the mission!");
-      return;
-    }
+    if (selected === null) return;
 
-    try {
-      // Get the contract and entry fee
-      const contract = getContract(); // Make sure getContract is correctly set up
-      const entryFee = await contract.entryFee();
+    const contract = getContract();
+    const entryFee = await contract.entryFee();
 
-      console.log("Entry Fee: ", entryFee.toString()); // Check if the entry fee is correct
+    const tx = await contract.startGame({
+      value: entryFee,
+    });
 
-      // Get the provider from the window.ethereum object (Web3Provider)
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
-
-      // Get the signer (connected wallet) from the provider
-      const signer = provider.getSigner();
-
-      // Check if the wallet has enough funds
-      const balance = await signer.getBalance();
-      console.log("Wallet Balance: ", balance.toString()); // Check the wallet balance
-
-      if (balance.lt(entryFee)) {
-        toast.warning("You do not have enough funds to start the mission.");
-        return;
-      }
-
-      // Ask MetaMask to send the transaction
-      const tx = await contract.startGame({
-        value: entryFee, // Sending the entry fee
-      });
-
-      // Wait for the transaction to be mined
-      await tx.wait();
-
-      toast.success(`Mission started with ${characters[selected].name}!`);
-      setMissionStarted(true);
-    } catch (error) {
-      toast.error("There was an error starting the mission.");
-      console.error(error);
-    }
+    await tx.wait();
+    setMissionStarted(true);
   };
 
   const handleEndGame = () => {
@@ -157,7 +127,6 @@ const HomePage = () => {
     // Handle any logic needed to end the game (reset state, etc.)
     setMissionStarted(false);
     setSelected(null);
-    toast.info("Game has been exited.");
   };
 
   return (
