@@ -7,7 +7,7 @@ import { getMetadata } from "~~/utils/scaffold-eth/getMetadata";
 
 export const metadata = getMetadata({
   title: "muffled birds",
-  description: "szn 1",
+  description: "birdy game",
 });
 
 const ScaffoldEthApp = ({ children }: { children: React.ReactNode }) => {
