@@ -18,7 +18,11 @@ interface Character {
 
 const contractAddress = "0x706e51256096F5aabA58A55B4e2B17416968E7D2";
 
+// const contractAddress = "0xec035D9603bC3447BA0370F45693744FBcA6363F"; TESTNET
+
 const mb = "0xCF078031f890Ed361442e09ebA6Ec255A47d6E72";
+
+// const mb = "0x394d1D22994541BD4cbC3E806d846F5D1a6F22F8";  TESTNET
 
 const getMB = () => {
   if (typeof window === "undefined" || !window.ethereum) {
