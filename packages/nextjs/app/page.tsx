@@ -11,9 +11,9 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { CheckCircleIcon } from "@heroicons/react/24/solid";
 
-const contractAddress = "0x706e51256096F5aabA58A55B4e2B17416968E7D2";
+// const contractAddress = "0x706e51256096F5aabA58A55B4e2B17416968E7D2"; DEVNET
 
-// const contractAddress = "0xec035D9603bC3447BA0370F45693744FBcA6363F"; TESTNET
+const contractAddress = "0xec035D9603bC3447BA0370F45693744FBcA6363F";
 
 const getContract = () => {
   if (typeof window === "undefined" || !window.ethereum) {
