@@ -32,7 +32,7 @@ const getContract = () => {
 const characters = [
   {
     name: "Birdie 1",
-    fullName: "Goldfinches",
+    fullName: "Goldfinch",
     power: "Leadership & Strategy",
     image: "/m1.png",
     background: "/2dw.jpg", // Add a unique background for Numbuh 1
@@ -233,7 +233,7 @@ const HomePage = () => {
                 {characters.map((char, index) => (
                   <div
                     key={index}
-                    className={`relative character p-4 bg-gray-800 rounded-xl shadow-lg flex flex-col items-center justify-center text-center cursor-pointer transition-all duration-300 
+                    className={` relative character p-4 bg-gray-800 rounded-xl shadow-lg flex flex-col items-center justify-center text-center cursor-pointer transition-all duration-300 
                   ${selected === index ? "scale-110 border-4 border-yellow-500 bg-yellow-500" : "bg-gray-700 hover:bg-black"}`}
                     onClick={() => toggleSelect(index)}
                   >

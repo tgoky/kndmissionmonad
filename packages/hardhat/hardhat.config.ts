@@ -37,7 +37,7 @@ const config: HardhatUserConfig = {
         version: "0.5.0", // Specify the Solidity version 0.7.6
         settings: {
           optimizer: {
-            enabled: true,  // Enable optimizer
+            enabled: true, // Enable optimizer
             runs: 200, // Set optimizer runs (for gas efficiency)
           },
         },
@@ -46,7 +46,7 @@ const config: HardhatUserConfig = {
         version: "0.5.16", // Specify the Solidity version 0.7.6
         settings: {
           optimizer: {
-            enabled: true,  // Enable optimizer
+            enabled: true, // Enable optimizer
             runs: 200, // Set optimizer runs (for gas efficiency)
           },
         },
@@ -81,7 +81,7 @@ const config: HardhatUserConfig = {
     customChains: [
       {
         network: "monadDevnet",
-        chainId: 20143,
+        chainId: 10143,
         urls: {
           browserURL: process.env.MONAD_EXPLORER_URL ?? "", // Correct explorer URL
           apiURL: process.env.MONAD_EXPLORER_URL ? `${process.env.MONAD_EXPLORER_URL}/api` : "", // Ensure a valid API URL is available, or leave empty
