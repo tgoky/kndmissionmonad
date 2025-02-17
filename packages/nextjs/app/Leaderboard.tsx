@@ -3,10 +3,17 @@ import { ArrowDownCircleIcon, ArrowUpCircleIcon } from "@heroicons/react/24/soli
 
 const generateRandomAddress = () => {
   const characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  const hexCharacters = "ABCDEFabcdef0123456789"; // Ensures third character is a valid hex character
   let address = "0x";
-  for (let i = 0; i < 40; i++) {
+
+  // Generate a random third character from hexCharacters
+  address += hexCharacters.charAt(Math.floor(Math.random() * hexCharacters.length));
+
+  // Generate the remaining 39 characters from the full character set
+  for (let i = 0; i < 39; i++) {
     address += characters.charAt(Math.floor(Math.random() * characters.length));
   }
+
   return address;
 };
 
