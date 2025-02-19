@@ -9,9 +9,17 @@ const Accelerate = () => {
   const initialTasks = [
     {
       id: "twitter",
-      title: "Follow us on Twitter",
+      title: "Follow us on X",
       description: "Stay updated with our latest updates.",
       link: "https://x.com/muffledbird",
+      buttonText: "Follow on X",
+      completed: false,
+    },
+    {
+      id: "twitter",
+      title: "Follow the CTO",
+      description: "get in touch us",
+      link: "https://x.com/0x80f",
       buttonText: "Follow on X",
       completed: false,
     },
