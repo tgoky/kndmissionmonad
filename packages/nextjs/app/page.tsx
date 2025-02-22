@@ -134,7 +134,7 @@ const HomePage = () => {
       {/* Left Sidebar */}
       <div className="w-1/5 min-h-screen bg-gray-900 flex flex-col items-center py-10 border-r border-gray-700">
         <p className="text-xs text-center">
-          connect wallet at the top right corner,{" "}
+          connect metamask wallet at the top right corner,{" "}
           <span className="blinking-text text-orange-400 font-bold"> select a character</span> Next and then click the
           start mission
         </p>
